@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a[20],i,n,pos,value;
+    cout << "enter limit " << endl;
+    cin>>n;
+    cout<<"enter the element"<<endl;
+    for(i=0;i<n;i++)
+        cin>>a[i];
+    cout<<"enter the position"<<endl;
+
+    cin>>pos;
+    cout<<"enter the value is:"<<endl;
+    cin>>value;
+    for(i=n-1;i<pos-1;i--)
+        a[i+1]=a[i];
+    a[pos-1]=value;
+    cout<<"the result is:"<<endl;
+    for(i=0;i<n;i++)
+        cout<<a[i];
+    return 0;
+}

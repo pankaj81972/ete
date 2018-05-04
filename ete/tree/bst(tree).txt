@@ -1,0 +1,141 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+
+struct BST
+{
+	int info;
+	struct bin_tree *left, *right;
+};
+
+typedef  struct   BST   node;
+
+node *insert (node *, int);
+void search(node *, int);
+int delete(node *, int);
+void display(node *);
+void main()
+{
+   struct node  *root = NULL;
+   int element, choice, num, flag;
+   clrscr();
+   while(1)
+   {
+      
+      printf(“Select an option\n”);
+      printf(“\n 1 - insert”);
+      printf(“\n 2 - Search”);
+      printf(“\n 3 - Delete”);
+      printf(“\n 4 - Display”);
+      printf(“\n 5 - Exit”);
+      printf(“\n Enter your choice:”);
+      scanf(“%d”, &choice);
+switch (choice)
+{
+case 1: 
+{
+  printf(“Enter node value:”);
+  scanf(“%d”, &element);
+  root = insert (root, element);
+  break; 
+}
+case 2: 
+{
+  printf(“Enter value to be searched:”);
+  scanf(“%d”, &num);
+  search(root, num);
+
+  break; 
+}
+case 3: 
+  {
+  printf(“\nEnter the element to be deleted”);
+  scanf(“%d”, &num);
+
+  flag=delete(root, num);
+
+  if (flag==1)
+  printf(“\nElement %d deleted from the list”,num);
+  else
+  printf(“\nElement %d not present in the list”,num);
+
+  getch();
+  break; 
+  }
+
+case 4: 
+  {
+  display( root );
+ 
+  break; 
+  }
+
+case 5: 
+{
+  exit(1);
+  break; 
+} 
+default: 
+  {
+  printf(“\n Invalid  choice”); 
+  break; 
+  }
+
+}  // end of switch
+}  // end of loop
+} // end of mai
+
+node  *insert ( node *r, int  n)
+{
+
+  if ( r == NULL )
+  {
+
+  r = (node *) malloc (sizeof (node));
+  r -> left = r -> right = NULL;
+  r -> info = n;
+
+  }
+else if (n < r->info)
+  r->left  = insert (r->left , n);
+
+else if (n > r->info)
+  r->right = insert (r->right , n);
+
+else if(n == r->info)
+ printf(“\nDuplicate Entry”);
+
+  return (r);
+}
+
+void search ( node *r, int  n)
+{
+
+  if ( r == NULL )
+  {
+printf(“%d not present in tree”, n);
+return;
+  }
+
+else if(n == r->info)
+ printf(“\n%d present in tree”,n);
+
+else if (n < r->info)
+  search (r->left , n);
+
+else 
+search (r->right , n);
+}
+
+  void display( node *r)
+  {
+
+  if (r->left != NULL)
+    display(r->left);
+
+  printf(“%d\n”, r->info);
+
+  if (r->right != NULL)
+    display(r->right);
+
+}
